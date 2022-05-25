@@ -1,8 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "owenvoke/arionum-api",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "A GraphQL API interface for the Arionum blockchain",
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
