@@ -1,0 +1,22 @@
+extend type Query {
+    transactions(
+        ids: [ID!]
+    ): [Transaction!] @paginate
+    transaction(
+        id: ID!
+    ): Transaction @find
+}
+
+type Transaction @guard(with: "sanctum") {
+    id: ID!
+    block: String!
+    height: Int!
+    destination: String! @rename(attribute: "dst")
+    value: Float! @rename(attribute: "val")
+    fee: Float!
+    signature: String!
+    version: Int!
+    message: String!
+    createdAt: DateTime! @rename(attribute: "date")
+    publicKey: String! @rename(attribute: "public_key")
+}

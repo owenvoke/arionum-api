@@ -1,0 +1,16 @@
+extend type Query {
+    accounts(
+        ids: [ID!]
+    ): [Account!] @paginate
+    account(
+        id: ID!
+    ): Account @find
+}
+
+type Account @guard(with: "sanctum") {
+    id: ID!
+    publicKey: String! @rename(attribute: "public_key")
+    blockId: String! @rename(attribute: "block")
+    balance: Float!
+    alias: String!
+}

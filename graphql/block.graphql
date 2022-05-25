@@ -1,0 +1,20 @@
+extend type Query {
+    blocks(
+        ids: [ID!]
+    ): [Block!] @paginate
+    block(
+        id: ID!
+    ): Block @find
+}
+
+type Block @guard(with: "sanctum") {
+    id: ID!
+    generator: String!
+    height: String! @rename(attribute: "block")
+    createdAt: DateTime! @rename(attribute: "date")
+    nonce: String!
+    signature: String!
+    difficulty: Int!
+    argon: String!
+    transactions: Int!
+}

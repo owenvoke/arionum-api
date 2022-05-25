@@ -1,0 +1,23 @@
+extend type Query {
+    mempools(
+        ids: [ID!]
+    ): [Mempool!] @paginate
+    mempool(
+        id: ID!
+    ): Mempool @find
+}
+
+type Mempool @guard(with: "sanctum") {
+    id: ID!
+    height: Int!
+    source: String! @rename(attribute: "src")
+    destination: String! @rename(attribute: "dst")
+    value: Float! @rename(attribute: "val")
+    fee: Float!
+    signature: String!
+    version: Int!
+    message: String!
+    publicKey: String! @rename(attribute: "public_key")
+    createdAt: DateTime! @rename(attribute: "date")
+    peer: String!
+}

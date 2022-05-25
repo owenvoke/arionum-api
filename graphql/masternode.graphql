@@ -1,0 +1,19 @@
+extend type Query {
+    masternodes(
+        ids: [ID!]
+    ): [Masternode!] @paginate
+    masternode(
+        id: ID!
+    ): Masternode @find
+}
+
+type Masternode @guard(with: "sanctum") {
+    id: ID!
+    publicKey: String! @rename(attribute: "public_key")
+    height: Int!
+    ip: String!
+    lastWon: Int!
+    blocklist: Int! @rename(attribute: "blacklist")
+    fails: Int!
+    status: Int!
+}
