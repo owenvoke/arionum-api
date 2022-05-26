@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -37,4 +39,14 @@ final class Mempool extends Model
     ];
 
     protected $fillable = [];
+
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, 'src', 'id');
+    }
+
+    public function destination(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, 'dst', 'id');
+    }
 }

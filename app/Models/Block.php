@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -31,4 +32,9 @@ final class Block extends Model
     ];
 
     protected $fillable = [];
+
+    public function generatedBy(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, 'generator', 'public_key');
+    }
 }

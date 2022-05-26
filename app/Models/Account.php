@@ -28,6 +28,11 @@ final class Account extends Model
 
     protected $fillable = [];
 
+    public function blocks(): HasMany
+    {
+        return $this->hasMany(Block::class, 'generator', 'id');
+    }
+
     public function transactionsFrom(): HasMany
     {
         return $this->hasMany(Transaction::class, 'public_key', 'public_key');
@@ -35,6 +40,6 @@ final class Account extends Model
 
     public function transactionsTo(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'dst');
+        return $this->hasMany(Transaction::class, 'dst', 'id');
     }
 }

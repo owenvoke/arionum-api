@@ -10,8 +10,6 @@ extend type Query {
 type Mempool @guard {
     id: ID!
     height: Int!
-    source: String! @rename(attribute: "src")
-    destination: String! @rename(attribute: "dst")
     value: Float! @rename(attribute: "val")
     fee: Float!
     signature: String!
@@ -20,4 +18,7 @@ type Mempool @guard {
     publicKey: String! @rename(attribute: "public_key")
     createdAt: DateTime! @rename(attribute: "date")
     peer: String!
+
+    source: Account! @belongsTo
+    destination: Account! @belongsTo
 }

@@ -2,7 +2,7 @@ extend type Query {
     accounts(
         ids: [ID!] @in(key: "id")
         aliases: [String!] @in(key: "alias")
-    ): [Account!] @paginate(maxCount: 50, defaultCount: 20)
+    ): [Account!] @paginate
     account(
         id: ID @eq @rules(apply: ["prohibits:alias", "required_without:alias"])
         alias: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
@@ -15,4 +15,8 @@ type Account @guard {
     blockId: String! @rename(attribute: "block")
     balance: Float!
     alias: String
+
+    blocks: [Block!] @hasMany
+    transactionsFrom: [Transaction!] @hasMany
+    transactionsTo: [Transaction!] @hasMany
 }

@@ -19,4 +19,6 @@ type Transaction @guard {
     message: String!
     createdAt: DateTime! @rename(attribute: "date")
     publicKey: String! @rename(attribute: "public_key")
+
+    destination: Account! @belongsTo
 }

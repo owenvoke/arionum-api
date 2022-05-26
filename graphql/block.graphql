@@ -9,7 +9,6 @@ extend type Query {
 
 type Block @guard {
     id: ID!
-    generator: String!
     height: String! @rename(attribute: "block")
     createdAt: DateTime! @rename(attribute: "date")
     nonce: String!
@@ -17,4 +16,6 @@ type Block @guard {
     difficulty: Int!
     argon: String!
     transactions: Int!
+
+    generatedBy: Account! @belongsTo
 }
