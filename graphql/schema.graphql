@@ -3,11 +3,14 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
-    viewer: User! @auth(guard: "sanctum") @guard(with: "sanctum")
+    viewer: User! @auth @guard
 }
 
 type User {
     id: ID!
+    name: String!
+    email: String!
+    createdAt: DateTime! @rename(attribute: "created_at")
 }
 
 #import account.graphql

@@ -1,13 +1,13 @@
 extend type Query {
     transactions(
-        ids: [ID!]
-    ): [Transaction!] @paginate
+        ids: [ID!] @in(key: "id")
+    ): [Transaction!] @paginate(maxCount: 50, defaultCount: 20)
     transaction(
-        id: ID!
+        id: ID! @eq
     ): Transaction @find
 }
 
-type Transaction @guard(with: "sanctum") {
+type Transaction @guard {
     id: ID!
     block: String!
     height: Int!

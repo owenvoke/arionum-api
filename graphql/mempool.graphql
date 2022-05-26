@@ -1,13 +1,13 @@
 extend type Query {
     mempools(
-        ids: [ID!]
-    ): [Mempool!] @paginate
+        ids: [ID!] @in(key: "id")
+    ): [Mempool!] @paginate(maxCount: 50, defaultCount: 20)
     mempool(
-        id: ID!
+        id: ID! @eq
     ): Mempool @find
 }
 
-type Mempool @guard(with: "sanctum") {
+type Mempool @guard {
     id: ID!
     height: Int!
     source: String! @rename(attribute: "src")

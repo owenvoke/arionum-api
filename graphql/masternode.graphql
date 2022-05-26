@@ -1,13 +1,13 @@
 extend type Query {
     masternodes(
-        ids: [ID!]
-    ): [Masternode!] @paginate
+        ids: [ID!] @in(key: "id")
+    ): [Masternode!] @paginate(maxCount: 50, defaultCount: 20)
     masternode(
-        id: ID!
+        id: ID! @eq
     ): Masternode @find
 }
 
-type Masternode @guard(with: "sanctum") {
+type Masternode @guard {
     id: ID!
     publicKey: String! @rename(attribute: "public_key")
     height: Int!

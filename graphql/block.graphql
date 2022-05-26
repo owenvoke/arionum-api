@@ -1,13 +1,13 @@
 extend type Query {
     blocks(
-        ids: [ID!]
-    ): [Block!] @paginate
+        ids: [ID!] @in(key: "id")
+    ): [Block!] @paginate(maxCount: 50, defaultCount: 20)
     block(
-        id: ID!
+        id: ID! @eq
     ): Block @find
 }
 
-type Block @guard(with: "sanctum") {
+type Block @guard {
     id: ID!
     generator: String!
     height: String! @rename(attribute: "block")

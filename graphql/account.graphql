@@ -1,16 +1,18 @@
 extend type Query {
     accounts(
-        ids: [ID!]
-    ): [Account!] @paginate
+        ids: [ID!] @in(key: "id")
+        aliases: [String!] @in(key: "alias")
+    ): [Account!] @paginate(maxCount: 50, defaultCount: 20)
     account(
-        id: ID!
+        id: ID @eq @rules(apply: ["prohibits:alias", "required_without:alias"])
+        alias: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
     ): Account @find
 }
 
-type Account @guard(with: "sanctum") {
+type Account @guard {
     id: ID!
     publicKey: String! @rename(attribute: "public_key")
     blockId: String! @rename(attribute: "block")
     balance: Float!
-    alias: String!
+    alias: String
 }
